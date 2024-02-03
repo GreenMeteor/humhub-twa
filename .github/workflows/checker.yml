@@ -17,11 +17,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Check if build directory exists
+      id: check_build_dir
+      run: test -d android/build && echo "Build directory found" || echo "Build directory not found"
+
     - name: Make gradlew executable
+      if: steps.check_build_dir.outputs.status != 'Build directory found'
       run: chmod +x android/gradlew
       working-directory: android
 
     - name: Build with Gradle
+      if: steps.check_build_dir.outputs.status != 'Build directory found'
       run: ./gradlew assembleRelease || exit 1
       working-directory: android
 
