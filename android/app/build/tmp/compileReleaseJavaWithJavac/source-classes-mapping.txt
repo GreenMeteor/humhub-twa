@@ -1,8 +1,0 @@
-net/greenmeteor/twa/LauncherActivity.java
- net.greenmeteor.twa.LauncherActivity
-net/greenmeteor/twa/Application.java
- net.greenmeteor.twa.Application
-net/greenmeteor/twa/DelegationService.java
- net.greenmeteor.twa.DelegationService
-net/greenmeteor/twa/BuildConfig.java
- net.greenmeteor.twa.BuildConfig

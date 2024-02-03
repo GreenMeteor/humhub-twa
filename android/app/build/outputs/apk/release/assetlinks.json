@@ -1,8 +1,0 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "net.greenmeteor.twa",
-        "sha256_cert_fingerprints": ["4A:C3:51:85:5C:75:EE:F5:26:4A:22:E6:0F:BA:35:4D:C3:77:5C:FA:50:48:AB:BB:0F:84:78:9D:07:34:13:C9"]
-      }
-    }]
