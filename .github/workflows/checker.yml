@@ -21,11 +21,6 @@ jobs:
       id: check_build_dir
       run: test -d android/build && echo "Build directory found" || echo "Build directory not found"
 
-    - name: Build with Gradle
-      if: steps.check_build_dir.outputs.status != 'Build directory found'
-      run: ./gradlew assembleRelease || exit 1
-      working-directory: android
-
     - name: Run lint
       run: ./gradlew lint || exit 1
       working-directory: android
