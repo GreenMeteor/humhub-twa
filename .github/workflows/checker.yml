@@ -16,36 +16,35 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      with:
-        repository: GreenMeteor/humhub-twa
-        path: android
 
     - name: Make gradlew executable
       run: chmod +x android/gradlew
+      working-directory: android
 
     - name: Build with Gradle
-      working-directory: android
       run: ./gradlew assembleRelease || exit 1
+      working-directory: android
 
     - name: Run lint
-      working-directory: android
       run: ./gradlew lint || exit 1
+      working-directory: android
 
     - name: Run tests
-      working-directory: android
       run: ./gradlew test || exit 1
+      working-directory: android
 
     - name: Install dependencies
-      working-directory: android
       run: |
         ./gradlew assembleDebug
         ./gradlew :app:installDebug
+      working-directory: android
 
     - name: Run TWA validation script
-      working-directory: android
       run: ./gradlew connectedAndroidTest || exit 1
+      working-directory: android
 
     - name: Cleanup
       run: |
         rm -rf android/build
         rm -rf android/.gradle
+      working-directory: android
