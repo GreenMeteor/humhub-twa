@@ -21,6 +21,13 @@ jobs:
       id: check_build_dir
       run: test -d android/build && echo "Build directory found" || echo "Build directory not found"
 
+    - name: Adjust gradlew permissions
+      run: |
+        ls -l android/gradlew
+        chmod u+x android/gradlew
+        ls -l android/gradlew
+      if: steps.check_build_dir.outputs.status != 'Build directory found'
+
     - name: Run lint
       run: ./gradlew lint || exit 1
       working-directory: android
