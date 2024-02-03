@@ -25,18 +25,15 @@ jobs:
 
     - name: Build with Gradle
       working-directory: android
-      run: |
-        ./gradlew assembleRelease || exit 1
+      run: ./gradlew assembleRelease || exit 1
 
     - name: Run lint
       working-directory: android
-      run: |
-        ./gradlew lint || exit 1
+      run: ./gradlew lint || exit 1
 
     - name: Run tests
       working-directory: android
-      run: |
-        ./gradlew test || exit 1
+      run: ./gradlew test || exit 1
 
     - name: Install dependencies
       working-directory: android
@@ -46,8 +43,7 @@ jobs:
 
     - name: Run TWA validation script
       working-directory: android
-      run: |
-        ./gradlew connectedAndroidTest || exit 1
+      run: ./gradlew connectedAndroidTest || exit 1
 
     - name: Cleanup
       run: |
