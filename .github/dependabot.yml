@@ -9,11 +9,7 @@ updates:
     directory: "/android" # Location of Java package manifests
     schedule:
       interval: "weekly"
-  - package-ecosystem: "roff" # See documentation for possible values
-    directory: "/" # Location of Roff (troff) package manifests
-    schedule:
-      interval: "weekly"
   - package-ecosystem: "swift" # See documentation for possible values
-    directory: "/" # Location of Swift package manifests
+    directory: "/ios" # Location of Swift package manifests
     schedule:
       interval: "weekly"
