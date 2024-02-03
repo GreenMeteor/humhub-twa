@@ -36,12 +36,6 @@ jobs:
       run: ./gradlew test || exit 1
       working-directory: android
 
-    - name: Install dependencies
-      run: |
-        ./gradlew assembleDebug
-        ./gradlew :app:installDebug
-      working-directory: android
-
     - name: Run TWA validation script
       run: ./gradlew connectedAndroidTest || exit 1
       working-directory: android
