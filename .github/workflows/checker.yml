@@ -1,0 +1,62 @@
+name: Checker
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Check TWA
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        path: android
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Build with Gradle
+      working-directory: android
+      run: |
+        ./gradlew assembleRelease || exit 1
+        # Abort if the build fails
+
+    - name: Run lint
+      working-directory: android
+      run: |
+        ./gradlew lint || exit 1
+        # Abort if linting fails
+
+    - name: Run tests
+      working-directory: android
+      run: |
+        ./gradlew test || exit 1
+        # Abort if tests fail
+
+    - name: Install dependencies
+      working-directory: android
+      run: |
+        ./gradlew assembleDebug
+        ./gradlew :app:installDebug
+        # Install the debug APK to test TWA functionality
+
+    - name: Run TWA validation script
+      working-directory: android
+      run: |
+        # Run UI tests using Espresso
+        ./gradlew connectedAndroidTest || exit 1
+        # Abort if UI tests fail
+
+    - name: Cleanup
+      run: |
+        rm -rf android/build
+        # Remove build artifacts
+        rm -rf android/.gradle
+        # Remove Gradle cache
