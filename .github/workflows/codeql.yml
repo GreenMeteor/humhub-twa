@@ -32,7 +32,7 @@ jobs:
       run: |
         cd GreenMeteor/humhub-twa/android
         ./gradlew assemble
-        ls -l app/build/outputs/apk/*.apk
+        ls -l app/build/outputs/apk/release/*.apk
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
