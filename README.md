@@ -9,7 +9,7 @@ Here are the different versions of our application for various platforms:
 
 | Platform | Validation | Last Checked Date |
 |----------|---------|--------------|
-| Android  | [![Checker](https://github.com/GreenMeteor/humhub-twa/actions/workflows/checker.yml/badge.svg?event=push)](https://github.com/GreenMeteor/humhub-twa/actions/workflows/checker.yml)  | February 2024 |
+| Android  | [![Checker](https://github.com/GreenMeteor/humhub-twa/actions/workflows/checker.yml/badge.svg?event=push)](https://github.com/GreenMeteor/humhub-twa/actions/workflows/checker.yml)  | March 2024 |
 | iOS      | -       | -            |
 | Windows  | -       | -            |
 
