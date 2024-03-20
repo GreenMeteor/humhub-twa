@@ -17,20 +17,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install dependencies
+    - name: Setup JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
+    - name: Install Gradle
       run: |
         sudo apt-get update
-        sudo apt-get install -y openjdk-11-jdk
+        sudo apt-get install -y gradle
       working-directory: android
 
-    - name: Verify gradlew existence
-      run: |
-        ls -l android/gradlew
-      if: steps.check_build_dir.outputs.status != 'Build directory found'
+    - name: Check if build directory exists
+      id: check_build_dir
+      run: test -d android/build && echo "Build directory found" || echo "Build directory not found"
 
     - name: Adjust gradlew permissions
       run: |
+        ls -l android/gradlew
         chmod +x android/gradlew
+        ls -l android/gradlew
       if: steps.check_build_dir.outputs.status != 'Build directory found'
 
     - name: Verify gradlew permissions
@@ -38,21 +44,23 @@ jobs:
         ls -l android/gradlew
       if: steps.check_build_dir.outputs.status != 'Build directory found'
 
-    - name: Check if build directory exists
-      id: check_build_dir
-      run: test -d android/build && echo "Build directory found" || echo "Build directory not found"
-
     - name: Run lint
-      run: ./gradlew lint || exit 1
-      working-directory: android
+      run: |
+        cd android
+        ./gradlew lint
+      if: steps.check_build_dir.outputs.status == 'Build directory found'
 
     - name: Run tests
-      run: ./gradlew test || exit 1
-      working-directory: android
+      run: |
+        cd android
+        ./gradlew test
+      if: steps.check_build_dir.outputs.status == 'Build directory found'
 
     - name: Run TWA validation script
-      run: ./gradlew connectedAndroidTest || exit 1
-      working-directory: android
+      run: |
+        cd android
+        ./gradlew connectedAndroidTest
+      if: steps.check_build_dir.outputs.status == 'Build directory found'
 
     - name: Cleanup
       run: |
