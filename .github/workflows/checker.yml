@@ -17,6 +17,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Install gradlew
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openjdk-11-jdk
+        ./gradlew --version
+      working-directory: android
+
     - name: Check if build directory exists
       id: check_build_dir
       run: test -d android/build && echo "Build directory found" || echo "Build directory not found"
@@ -29,15 +36,15 @@ jobs:
       if: steps.check_build_dir.outputs.status != 'Build directory found'
 
     - name: Run lint
-      run: gradlew lint || exit 1
+      run: ./gradlew lint || exit 1
       working-directory: android
 
     - name: Run tests
-      run: gradlew test || exit 1
+      run: ./gradlew test || exit 1
       working-directory: android
 
     - name: Run TWA validation script
-      run: gradlew connectedAndroidTest || exit 1
+      run: ./gradlew connectedAndroidTest || exit 1
       working-directory: android
 
     - name: Cleanup
