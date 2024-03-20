@@ -29,15 +29,15 @@ jobs:
       if: steps.check_build_dir.outputs.status != 'Build directory found'
 
     - name: Run lint
-      run: .gradlew lint || exit 1
+      run: gradlew lint || exit 1
       working-directory: android
 
     - name: Run tests
-      run: .gradlew test || exit 1
+      run: gradlew test || exit 1
       working-directory: android
 
     - name: Run TWA validation script
-      run: .gradlew connectedAndroidTest || exit 1
+      run: gradlew connectedAndroidTest || exit 1
       working-directory: android
 
     - name: Cleanup
