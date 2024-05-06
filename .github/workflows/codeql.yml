@@ -25,9 +25,8 @@ jobs:
     - name: Debug
       run: |
         ls -l
-        cd GreenMeteor/humhub-twa/android
-        ls -l
-      if: always() # Always run this step for debugging purposes
+        ls -l $GITHUB_REPOSITORY/android
+      if: always()
 
     - name: Check Directory
       run: |
@@ -38,7 +37,7 @@ jobs:
           echo "Directory does not exist"
           exit 1
         fi
-      continue-on-error: true # Continue even if the directory check fails
+      continue-on-error: true
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
@@ -48,10 +47,10 @@ jobs:
     # Manually build your code here, but only if the directory exists
     - name: Build
       run: |
-        cd GreenMeteor/humhub-twa/android
+        cd $GITHUB_REPOSITORY/android
         ./gradlew assemble
         ls -l app/build/outputs/apk/release/*.apk
-      if: always() # Always run this step, but only if the directory check passed
+      if: always()
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
