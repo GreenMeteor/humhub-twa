@@ -24,7 +24,7 @@ jobs:
 
     - name: Check Directory
       run: |
-        if [ -d "GreenMeteor/humhub-twa/android" ]; then
+        if [ -d "android" ]; then
           echo "Directory exists"
           exit 0
         else
@@ -41,7 +41,7 @@ jobs:
     # Manually build your code here, but only if the directory exists
     - name: Build
       run: |
-        cd $GITHUB_REPOSITORY/android
+        cd android
         ./gradlew assemble
         ls -l app/build/outputs/apk/release/*.apk
       if: always()
