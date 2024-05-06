@@ -38,6 +38,14 @@ jobs:
       with:
         languages: java-kotlin
 
+    # Install Java 17 and set JAVA_HOME
+    - name: Set up Java 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: "adopt"
+        java-version: "17"
+        architecture: "x64"
+
     # Manually build your code here, but only if the directory exists
     - name: Build
       run: |
