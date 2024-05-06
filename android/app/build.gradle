@@ -157,6 +157,12 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
+
+    // Add the namespace configuration here
+    aaptOptions {
+        // Replace 'your.namespace.here' with the actual namespace value
+        additionalParameters "--manifest-namespace", "net.greenmeteor.twa"
+    }
 }
 
 task generateShorcutsFile {
