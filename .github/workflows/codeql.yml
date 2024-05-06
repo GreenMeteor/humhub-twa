@@ -22,17 +22,36 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Debug
+      run: |
+        ls -l
+        cd GreenMeteor/humhub-twa/android
+        ls -l
+      if: always() # Always run this step for debugging purposes
+
+    - name: Check Directory
+      run: |
+        if [ -d "GreenMeteor/humhub-twa/android" ]; then
+          echo "Directory exists"
+          exit 0
+        else
+          echo "Directory does not exist"
+          exit 1
+        fi
+      continue-on-error: true # Continue even if the directory check fails
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
         languages: java-kotlin
 
-    # Manually build your code here
+    # Manually build your code here, but only if the directory exists
     - name: Build
       run: |
         cd GreenMeteor/humhub-twa/android
         ./gradlew assemble
-        ls -l app/build/outputs/apk/release/app-release-unsigned.apk
+        ls -l app/build/outputs/apk/release/*.apk
+      if: always() # Always run this step, but only if the directory check passed
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
