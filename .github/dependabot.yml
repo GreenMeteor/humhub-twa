@@ -2,14 +2,19 @@
 # package ecosystems to update and where the package manifests are located.
 # Please see the documentation for all configuration options:
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 version: 2
 updates:
-  - package-ecosystem: "gradle" # See documentation for possible values
-    directory: "/android" # Location of Java package manifests
+  - package-ecosystem: "gradle"
+    directory: "/android"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "swift" # See documentation for possible values
-    directory: "/ios" # Location of Swift package manifests
+    labels:
+      - "Type: Dependencies"
+      - "Language: Java"
+  - package-ecosystem: "swift"
+    directory: "/ios"
     schedule:
       interval: "weekly"
+    labels:
+      - "Type: Dependencies"
+      - "Language: Swift"
